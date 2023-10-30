@@ -7,19 +7,17 @@ using Microsoft.EntityFrameworkCore;
 namespace geo_api.Features.Location;
 
 public sealed record GetRequestAuditsQuery
-    (int? Page, int? PageSize, SortDirection? Sort = SortDirection.Descending) : IRequest<GetRequestAuditsResponse>,
-        IPageable, ISortable;
+    (int? Page, int? PageSize, SortDirection? Sort = SortDirection.Descending) :
+        IRequest<PageableResponse<RequestAuditResponse>>, IPageable, ISortable;
 
-public sealed record GetRequestAuditsResponse
-    (int? CurrentPage, int? PageSize, List<RequestAuditResponse> Data) : IPageableResponse<RequestAuditResponse>;
-
-public sealed class GetRequestAuditsQueryHandler : IRequestHandler<GetRequestAuditsQuery, GetRequestAuditsResponse>
+public sealed class
+    GetRequestAuditsQueryHandler : IRequestHandler<GetRequestAuditsQuery, PageableResponse<RequestAuditResponse>>
 {
     private readonly GeoApiContext _dbContext;
 
     public GetRequestAuditsQueryHandler(GeoApiContext dbContext) { _dbContext = dbContext; }
 
-    public async Task<GetRequestAuditsResponse> Handle(
+    public async Task<PageableResponse<RequestAuditResponse>> Handle(
         GetRequestAuditsQuery request,
         CancellationToken cancellationToken)
     {
@@ -52,6 +50,6 @@ public sealed class GetRequestAuditsQueryHandler : IRequestHandler<GetRequestAud
             ))
             .ToListAsync(cancellationToken);
 
-        return new GetRequestAuditsResponse(page, pageSize, audits);
+        return new PageableResponse<RequestAuditResponse>(page, pageSize, audits);
     }
 }

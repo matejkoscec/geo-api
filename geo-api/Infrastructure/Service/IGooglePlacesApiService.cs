@@ -5,7 +5,7 @@ namespace geo_api.Infrastructure.Service;
 
 public interface IGooglePlacesApiService
 {
-    Task<NearbySearchNewResponse?> NearbySearch(
+    Task<NearbySearchNewResponse> NearbySearch(
         NearbySearchNewRequest request,
         string[] fieldMask,
         CancellationToken cancellationToken);
