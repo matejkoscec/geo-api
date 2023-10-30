@@ -8,7 +8,7 @@ var connection = new HubConnectionBuilder()
 
 connection.On<string>("ReceiveMessage", Console.WriteLine);
 
-connection.Reconnecting += (_) =>
+connection.Reconnecting += _ =>
 {
     Console.WriteLine("Connection lost. Reconnecting...");
     return Task.CompletedTask;
