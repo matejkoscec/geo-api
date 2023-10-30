@@ -38,20 +38,17 @@ public sealed class NearbySearchQueryValidator : AbstractValidator<NearbySearchQ
 public sealed class NearbySearchRequestHandler : IRequestHandler<NearbySearchQuery, NearbySearchNewResponse?>
 {
     private readonly ILogger<NearbySearchRequestHandler> _logger;
-    private readonly IValidator<NearbySearchQuery> _validator;
     private readonly IGooglePlacesApiService _googlePlaces;
     private readonly GeoApiContext _dbContext;
     private readonly IHubContext<NearbySearchHub, ILocationClient> _hubContext;
 
     public NearbySearchRequestHandler(
         ILogger<NearbySearchRequestHandler> logger,
-        IValidator<NearbySearchQuery> validator,
         IGooglePlacesApiService googlePlaces,
         GeoApiContext dbContext,
         IHubContext<NearbySearchHub, ILocationClient> hubContext)
     {
         _logger = logger;
-        _validator = validator;
         _googlePlaces = googlePlaces;
         _dbContext = dbContext;
         _hubContext = hubContext;
@@ -59,12 +56,6 @@ public sealed class NearbySearchRequestHandler : IRequestHandler<NearbySearchQue
 
     public async Task<NearbySearchNewResponse?> Handle(NearbySearchQuery query, CancellationToken cancellationToken)
     {
-        var validationResult = await _validator.ValidateAsync(query, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            throw new ValidationException(validationResult.Errors);
-        }
-
         var request = new NearbySearchNewRequest(
             new LocationRestriction(
                 new Circle(

@@ -2,7 +2,10 @@ using System.Threading.RateLimiting;
 using FluentValidation;
 using geo_api.Features.Location;
 using geo_api.Infrastructure;
+using geo_api.Infrastructure.Middlewares;
 using geo_api.Infrastructure.Persistence;
+using geo_api.Infrastructure.PipelineBehavior;
+using MediatR;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +20,11 @@ builder.Services.AddHttpClients(builder.Configuration);
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<Program>());
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblyContaining<Program>();
+    config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+});
 
 builder.Services.AddDbContext<GeoApiContext>(options =>
 {
@@ -56,6 +63,8 @@ if (app.Environment.IsDevelopment())
 app.UseForwardedHeaders();
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ValidationMiddleware>();
 
 app.UseRateLimiter();
 
