@@ -1,7 +1,7 @@
 # geo-api
 
 This is a prototype implementation of a high traffic API.
-The application exposes an HTTP API that allows the user to query for information around a specific loication.
+The application exposes an HTTP API that allows the user to query for information around a specific location.
 Under the hood, the app calls the Google Places API to get the information.
 Every request is then logged, audited to the database and sent to all the subscribers connected to a SignalR hub.
 
