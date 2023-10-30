@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "geo-api", "geo-api\geo-api.csproj", "{57C539EC-0903-45D3-9167-B655BB901618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "geo-api-consumer", "geo-api-consumer\geo-api-consumer.csproj", "{BDAF2CF5-280A-4FCD-A214-34B639D239EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57C539EC-0903-45D3-9167-B655BB901618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C539EC-0903-45D3-9167-B655BB901618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C539EC-0903-45D3-9167-B655BB901618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C539EC-0903-45D3-9167-B655BB901618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAF2CF5-280A-4FCD-A214-34B639D239EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAF2CF5-280A-4FCD-A214-34B639D239EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAF2CF5-280A-4FCD-A214-34B639D239EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAF2CF5-280A-4FCD-A214-34B639D239EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  geo-api-db:
+    image: postgres:15.3
+    environment:
+      POSTGRES_DB: geoapi
+      POSTGRES_USER: geoapi
+      POSTGRES_PASSWORD: geoapi
+    volumes:
+      - geo-api-db-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  geo-api-db-data:
