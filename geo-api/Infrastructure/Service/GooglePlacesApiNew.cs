@@ -10,6 +10,7 @@ public class GooglePlacesApiNew : IGooglePlacesApiService
     private readonly HttpClient _googleApiClient;
 
     private const string DefaultFieldMask = "places.displayName,places.formattedAddress";
+    private const string RequestUri = "v1/places:searchNearby";
 
     public GooglePlacesApiNew(HttpClient googleApiClient)
     {
@@ -32,7 +33,7 @@ public class GooglePlacesApiNew : IGooglePlacesApiService
             httpContent.Headers.Add("X-Goog-FieldMask", DefaultFieldMask);
         }
 
-        var response = await _googleApiClient.PostAsync("v1/places:searchNearby", httpContent, cancellationToken);
+        var response = await _googleApiClient.PostAsync(RequestUri, httpContent, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         return (await response.Content.ReadFromJsonAsync<NearbySearchNewResponse>(cancellationToken: cancellationToken))!;

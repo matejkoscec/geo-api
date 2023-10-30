@@ -1,6 +1,4 @@
-﻿using geo_api.Infrastructure.Pagination;
-
-namespace geo_api.Features.Location.Response;
+﻿namespace geo_api.Features.Location.Response;
 
 public sealed record RequestAuditResponse(
     double Lat,
