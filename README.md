@@ -9,6 +9,45 @@ System architecture:
 
 ![alt text](system-architecture.jpg)
 
+### Running the application
+
+Running the API:
+```shell
+# go to project root
+$ cd geo-api
+
+$ dotnet run --launch-profile https
+```
+
+Running the Database:
+```shell
+# go to project root
+$ cd geo-api/Support
+
+# make sure to have Docker installed
+$ docker-compose up
+```
+
+Running the Consumer:
+```shell
+# go to project root
+$ cd geo-api-consumer
+
+$ dotnet run
+```
+
+Trying out the API:
+```shell
+curl -X POST http://localhost:5176/api/v1/locations/nearby-search \
+-H "Content-Type: application/json" \
+-d '{
+    "lat": 37.7937,
+    "lng": -122.3965,
+    "radius": 500,
+    "fieldMask": ["places.displayName", "places.formattedAddress"],
+}'
+```
+
 ### Scaling the application
 
 The application is designed so that it can be easily distributed and scaled horizontally and vertically.
